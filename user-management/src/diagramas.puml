@@ -1,0 +1,30 @@
+@startuml
+class Person{
+    id
+    name
+    surname
+    dni
+    contactPerson
+    fdn
+    communities[]
+    contactMethods[]
+}
+
+class Community{
+    id
+    name
+    persons []
+}
+
+class contactMethod{
+    tipe
+    value 
+    favourite
+}
+Person->contactMethod
+Person->Community
+Community->Person
+Person->Person
+
+
+@enduml
