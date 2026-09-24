@@ -16,15 +16,12 @@ el diagrama de clases esta en diagramas.puml
 
 # Restricciones Tecnicas
 
-para darse de baja de una comunidad una persona debe tener todas sus operaciones cerradas hacer un get de operation management recibiendo el id de lapersona y 
+para darse de baja de una comunidad una persona debe tener todas sus operaciones cerradas hacer un get de operation management recibiendo el id de la persona y 
 Las operaciones permitidas son el préstamo, devolución, la cesión de la propiedad y la baja del ejemplar, todo esto vive en otro servicio y nosotros tenemos que hacer un get de ese servicio no esta en local
 
 Metodos a Aplicar
 
 Mediante una Api rest en nest mediante Http que el direcotrio de src tenga una logica de comunicaion de la siguiente manera
-
-
-No vamos a persistir en una db si no usar repositorios de memoria
 
 # Especificacion de este Servicio
 
