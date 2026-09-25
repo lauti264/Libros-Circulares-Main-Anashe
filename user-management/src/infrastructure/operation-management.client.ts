@@ -17,6 +17,21 @@ export class OperationManagementClient {
       process.env.OPERATION_MANAGEMENT_URL ?? 'http://localhost:3001';
 
     try {
+      const booleanResponse = await firstValueFrom(
+        this.httpService.get<boolean>(`${baseUrl}/operations/user/${personId}`),
+      );
+
+      if (typeof booleanResponse.data === 'boolean') {
+        return !booleanResponse.data;
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response?.status !== 404) {
+        // continue to the fallback below when the boolean endpoint is not available
+      }
+    }
+
+    try {
       const response = await firstValueFrom(
         this.httpService.get(`${baseUrl}/persons/${personId}/operations`),
       );

@@ -21,6 +21,17 @@ let OperationManagementClient = class OperationManagementClient {
     async hasOpenOperations(personId) {
         const baseUrl = process.env.OPERATION_MANAGEMENT_URL ?? 'http://localhost:3001';
         try {
+            const booleanResponse = await (0, rxjs_1.firstValueFrom)(this.httpService.get(`${baseUrl}/operations/user/${personId}`));
+            if (typeof booleanResponse.data === 'boolean') {
+                return !booleanResponse.data;
+            }
+        }
+        catch (error) {
+            const axiosError = error;
+            if (axiosError.response?.status !== 404) {
+            }
+        }
+        try {
             const response = await (0, rxjs_1.firstValueFrom)(this.httpService.get(`${baseUrl}/persons/${personId}/operations`));
             const data = response.data;
             const operations = Array.isArray(data)

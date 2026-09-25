@@ -23,26 +23,30 @@ Loan{
     id
     owner
     ownerLoan
-    bookId
+    copyId
     dateBegin
     dateEnd
 }
 
 Return{
     id
-    ownerLoan
-    owner
+    Loan
+    date
+
 }
 
 Assignment{
     id
+    copyId
     owner
     ownerAssignment
+    date
 }
 
 UnsuscribeB{
     id
-    bookId
+    copyId
+    date
 }
 ## Operaciones Permitidas - Flujo
 Crean un metodo $Comunication en este metodo se tiene en cuenta la comunicacion entre community y person, mediante este metodo se le cambia el estado a las unidades, teniendo en cuenta las restricciones tecnicas del sistema.
@@ -54,6 +58,7 @@ desde post loan debo que la persona que tenia en el momento de la operacion el l
 ### Return
 Post desde Return
 el return es el VENCIMIENTO del prestamo sin que haya un nuevo prestamo, por lo que el libro es devuelto a su propietario.
+Este proceso deberia ser automatico, pero vamos a hacerlo a traves de un post de forma manual.
 
 ### Assignment
 Post desde Assignment
@@ -64,8 +69,17 @@ Post desde UnsuscribeB
 UnsuscribeB es la baja del libro, por lo que no se puede ejercer sobre el ninguna operacion, ni prestamo, ni devolucion, ni cesion de propiedad.
 
 
+ 
+## ConsultEndpoint
+Get Operation/user/id recibe el ownerId de copy y para darse de baja de una comunidad tiene que tener todas las operaciones cerradas
+
+Y este endpoint debe devolver true o false en caso de que el ownerId tenga todas las operaciones cerradas devolver True en otro caso no.
+
+Operaciones cerradas significa que todos los prestamos que tenga asociados a el tengan una devolucion asociada, tanto si el owner lo presto como el ownerLoan.
+
 ## Casos Bordes
 
 !Siempre tener en cuenta las restricciones del sistema!
 
-No se me ocurre ninguno mañana lo veo con EZE GOAT
+Antes de cada operacion deberiamos verificar que la copyID no este dado de baja 
+
